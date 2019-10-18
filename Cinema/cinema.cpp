@@ -4,7 +4,7 @@
 #include <iostream>
 #include <assert.h>
 
-#include "Cinema.h"
+#include "cinema.h"
 
 
 void Cinema::compraIngresso(Filme filme)
@@ -15,13 +15,17 @@ void Cinema::exibeFilmesEmExibicao()
 {
 }
 
-void Cinema::registraFilme(std::string nome)
+void Cinema::registraFilme(Filme filme)
 {
 }
 
 bool Cinema::verificaFilmeValido()
 {
 	return 0;
+}
+
+void Cinema::addExibicao(Data data, Horario horario, std::string audio, Sala sala)
+{
 }
 
 void Cinema::ExibeFilmesRegistrados()
@@ -32,10 +36,16 @@ void Cinema::exibeSalasDisponiveis(Data data, Horario horario)
 {
 }
 
-void Cinema::addExibicao(Data data, Horario horario, std::string audio, Sala sala)
+Sala Cinema::alocaSalaParaExibicao(Exibicao exibicao)
 {
+    //return Sala();
 }
 
 void Cinema::addSala(std::string nome)
 {
+}
+
+bool Cinema::verificaSala()
+{
+	return 0;
 }

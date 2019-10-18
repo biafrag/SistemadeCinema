@@ -15,4 +15,12 @@ private:
 
 	int numAssentos;
 
+
+public:
+    Sala(std::string nome, std::string id, int num);
+
+    void marcaAssento(bool status);
+
+    void marcaTodoOsAssentos(bool status);
+
 };

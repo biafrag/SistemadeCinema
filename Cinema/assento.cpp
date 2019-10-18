@@ -1,18 +1,9 @@
-#pragma pnce
-
 #include <string>
 #include <vector>
 #include <list>
 #include <iostream>
 #include <assert.h>
 
-class Data
-{
-private:
-	int dia;
+#include "assento.h"
 
-	int mes;
 
-	int ano;
-
-};

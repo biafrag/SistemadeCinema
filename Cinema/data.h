@@ -1,9 +1,18 @@
+#pragma once
+
 #include <string>
 #include <vector>
 #include <list>
 #include <iostream>
 #include <assert.h>
 
-#include "Assento.h"
+class Data
+{
+private:
+	int dia;
 
+	int mes;
 
+	int ano;
+
+};

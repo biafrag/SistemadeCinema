@@ -6,10 +6,11 @@
 #include <iostream>
 #include <assert.h>
 
-#include "Filme.h"
-#include "Data.h"
-#include "Horario.h"
-#include "Sala.h"
+#include "filme.h"
+//#include "data.h"
+//#include "horario.h"
+#include "sala.h"
+#include "exibicao.h"
 
 class Cinema
 {
@@ -25,25 +26,41 @@ private:
 
 public:
 	/**
-	 * Importante para caso de uso Alocação de assentos
+	 * Importante para caso de uso Aloca??o de assentos
 	 */
 	void compraIngresso(Filme filme);
 
 	/**
-	 * Importante para caso de uso Alocação de assentos
+	 * Importante para caso de uso Aloca??o de assentos
 	 */
 	void exibeFilmesEmExibicao();
 
-    void registraFilme(std::string nome);
+	/**
+	 * Importante para caso de uso Cadastro Exibi?o em Sala
+	 */
+	void registraFilme(Filme filme);
 
+	/**
+	 * Importante para caso de uso Cadastro Exibi?o em Sala
+	 */
     bool verificaFilmeValido();
-
-	void ExibeFilmesRegistrados();
-
-	void exibeSalasDisponiveis(Data data, Horario horario);
 
     void addExibicao(Data data, Horario horario, std::string audio, Sala sala);
 
+	/**
+	 * Importante para caso de uso Cadastro Exibi?o em Sala
+	 */
+	void ExibeFilmesRegistrados();
+
+	/**
+	 * Importante para caso de uso Cadastro Exibi?o em Sala
+	 */
+	void exibeSalasDisponiveis(Data data, Horario horario);
+
+	Sala alocaSalaParaExibicao(Exibicao exibicao);
+
     void addSala(std::string nome);
+
+    bool verificaSala();
 
 };

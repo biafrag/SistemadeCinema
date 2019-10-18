@@ -4,6 +4,6 @@
 #include <iostream>
 #include <assert.h>
 
-#include "Ator.h"
+#include "ator.h"
 
 
