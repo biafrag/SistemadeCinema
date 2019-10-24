@@ -9,11 +9,39 @@
 class Assento
 {
 private:
-    std::string numero;
+    /**
+     * @brief Precisa ser que nem da modelagem?
+     */
+    int _numero;
 
-    std::string tipo;
+    /**
+     * @brief Precisa mesmo?
+     */
+    std::string _tipo;
 
-    bool status;
+    bool _status;
+
+public:
+
+    Assento(int numero,std::string tipo =  "Normal",bool status = true);
+
+    /**
+     * @brief Retorna o numero do assento
+     */
+    int getNumero();
+
+    /**
+     * @brief Retorna o status do assento
+     */
+    bool getStatus();
+
+    /**
+     * @brief Seta o status do assento
+     */
+    void setStatus(bool status);
+
+
+
 
 };
 

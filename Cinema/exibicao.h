@@ -8,52 +8,51 @@
 
 #include "horario.h"
 #include "data.h"
-#include "assento.h"
+#include "ingresso.h"
+#include "sala.h"
 
 class Exibicao
 {
 private:
-	Horario horario;
+    Horario _horario;
 
-    int publico;
+    std::string _audio;
 
-    std::string audio;
+    Data _dia;
 
-    float rendimentoExibicao;
-
-	Data dia;
+    Sala sala;
 
 
 public:
     Exibicao(Horario horario, std::string audio, Data dia);
 
 	/**
-     * Importante para caso de uso Rendimento/Publico
+     * @brief Importante para caso de uso Rendimento/Publico : Calcula Rendimento da exibição
 	 */
 	float calculaRendimento();
 
 	/**
-     * Importante para caso de uso Rendimento/Publico
+     * @brief Importante para caso de uso Rendimento/Publico
 	 */
 	int calculaPublico();
 
 	/**
-     * Importante para caso de uso Alocacao de assentos
+     * @brief Importante para caso de uso Alocacao de assentos
 	 */
 	void exibeHorario();
 
 	/**
-     * Importante para caso de uso Alocacao de assentos
+     * @brief Importante para caso de uso Alocacao de assentos
 	 */
 	void exibeData();
 
 	/**
-     * Importante para caso de uso Alocacao de assentos
+     * @brief Importante para caso de uso Alocacao de assentos
 	 */
 	void exibeAssentosDisponiveis();
 
 	/**
-     * Importante para caso de uso Alocacao de assentos
+     * @brief Importante para caso de uso Alocacao de assentos
 	 */
     void marcaAssento(Assento assento, bool status);
 

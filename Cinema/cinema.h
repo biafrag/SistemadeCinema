@@ -26,34 +26,34 @@ private:
 
 public:
 	/**
-	 * Importante para caso de uso Aloca??o de assentos
+     * @brief Importante para caso de uso Aloca??o de assentos
 	 */
 	void compraIngresso(Filme filme);
 
 	/**
-	 * Importante para caso de uso Aloca??o de assentos
+     * @brief Importante para caso de uso Aloca??o de assentos
 	 */
 	void exibeFilmesEmExibicao();
 
 	/**
-	 * Importante para caso de uso Cadastro Exibi?o em Sala
+     * @brief Importante para caso de uso Cadastro Exibi?o em Sala
 	 */
 	void registraFilme(Filme filme);
 
 	/**
-	 * Importante para caso de uso Cadastro Exibi?o em Sala
+     * @brief Importante para caso de uso Cadastro Exibi?o em Sala
 	 */
     bool verificaFilmeValido();
 
     void addExibicao(Data data, Horario horario, std::string audio, Sala sala);
 
 	/**
-	 * Importante para caso de uso Cadastro Exibi?o em Sala
+     * @brief Importante para caso de uso Cadastro Exibi?o em Sala
 	 */
 	void ExibeFilmesRegistrados();
 
 	/**
-	 * Importante para caso de uso Cadastro Exibi?o em Sala
+     * @brief Importante para caso de uso Cadastro Exibi?o em Sala
 	 */
 	void exibeSalasDisponiveis(Data data, Horario horario);
 

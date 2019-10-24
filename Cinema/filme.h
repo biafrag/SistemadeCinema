@@ -16,17 +16,17 @@ private:
 
 public:
 	/**
-	 * Importante para caso de uso Rendimento/P?blico
+     * @brief Importante para caso de uso Rendimento/P?blico
 	 */
 	float calculaRendimento();
 
 	/**
-	 * Importante para caso de uso Rendimento/P?blico
+     * @brief Importante para caso de uso Rendimento/P?blico
 	 */
 	int calculaPublico();
 
 	/**
-	 * Importante para caso de uso Aloca?ao de assentos
+     * @brief Importante para caso de uso Aloca?ao de assentos
 	 */
 	void mostraExibicoes();
 

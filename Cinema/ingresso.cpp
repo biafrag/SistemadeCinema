@@ -4,6 +4,3 @@
 #include <iostream>
 #include <assert.h>
 
-#include "ingresso.h"
-
-

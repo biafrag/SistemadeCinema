@@ -26,6 +26,7 @@ bool Cinema::verificaFilmeValido()
 
 void Cinema::addExibicao(Data data, Horario horario, std::string audio, Sala sala)
 {
+    Exibicao e();
 }
 
 void Cinema::ExibeFilmesRegistrados()

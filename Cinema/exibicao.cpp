@@ -9,11 +9,12 @@
 
 Exibicao::Exibicao(Horario horario, std::string audio, Data dia)
 {
+
 }
 
 float Exibicao::calculaRendimento()
 {
-	return 0;
+
 }
 
 int Exibicao::calculaPublico()
