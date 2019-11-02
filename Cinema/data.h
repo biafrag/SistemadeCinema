@@ -15,4 +15,6 @@ private:
 
 	int ano;
 
+    std::string getDataPadrao();
+
 };

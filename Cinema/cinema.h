@@ -5,6 +5,7 @@
 #include <list>
 #include <iostream>
 #include <assert.h>
+#include <QStringList>
 
 #include "filme.h"
 //#include "data.h"
@@ -23,6 +24,9 @@ private:
 
     std::string cnpj;
 
+    std::vector<Filme> filmesExibicao;
+    std::vector<Exibicao> exibicoes;
+
 
 public:
 	/**
@@ -38,8 +42,13 @@ public:
 	/**
      * @brief Importante para caso de uso Cadastro Exibi?o em Sala
 	 */
-	void registraFilme(Filme filme);
+    void registraFilme(std::string nome);
 
+    QStringList getnomesFilmesEmExibicao();
+
+    std::vector<Exibicao> getExibicoes(std::string nomeFilme);
+
+    std::vector<std::pair<std::string, std::string> > getDatasHorarios(std::string nomeFilme);
 	/**
      * @brief Importante para caso de uso Cadastro Exibi?o em Sala
 	 */

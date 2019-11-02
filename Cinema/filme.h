@@ -9,12 +9,15 @@
 class Filme
 {
 private:
-    std::string nome;
-
-    float rendimento;
+    std::string _nome;
 
 
 public:
+
+    Filme();
+
+    Filme(std::string nome);
+
 	/**
      * @brief Importante para caso de uso Rendimento/P?blico
 	 */
@@ -29,5 +32,7 @@ public:
      * @brief Importante para caso de uso Aloca?ao de assentos
 	 */
 	void mostraExibicoes();
+
+    std::string getNome();
 
 };

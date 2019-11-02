@@ -15,8 +15,59 @@ void Cinema::exibeFilmesEmExibicao()
 {
 }
 
-void Cinema::registraFilme(Filme filme)
+void Cinema::registraFilme(std::string nome)
 {
+    Filme novoFilme(nome);
+    filmesExibicao.push_back(novoFilme);
+}
+
+QStringList Cinema::getnomesFilmesEmExibicao()
+{
+    QStringList lista;
+    for(unsigned int i = 0; i < filmesExibicao.size(); i++)
+    {
+        std::string e = filmesExibicao[i].getNome();
+        QString s(e.c_str());
+        lista.append(s);
+    }
+    return lista;
+}
+
+std::vector<Exibicao> Cinema::getExibicoes(std::string nomeFilme)
+{
+    std::vector<Exibicao> ex;
+    Filme filme;
+    for(unsigned int i = 0; i < filmesExibicao.size(); i++)
+    {
+        if(filmesExibicao[i].getNome() == nomeFilme)
+        {
+            filme = filmesExibicao[i];
+            break;
+        }
+    }
+
+    for(unsigned int i = 0; i < exibicoes.size(); i++)
+    {
+        if(exibicoes[i].getFilme().getNome() == filme.getNome())
+        {
+            ex.push_back(exibicoes[i]);
+        }
+    }
+
+
+}
+
+std::vector<std::pair<std::string,std::string> > Cinema::getDatasHorarios(std::string nomeFilme)
+{
+    std::vector<std::pair<Data, Horario>> datas;
+    std::vector<Exibicao> ex = getExibicoes(nomeFilme);
+    for(unsigned int i = 0; i < ex.size(); i++)
+    {
+        Exibicao exibicao = ex[i];
+        std::string horario = exibicao.getHorario().getHorarioInicio();
+        std::string data = exibicao.getData().getDataPadrao();
+
+    }
 }
 
 bool Cinema::verificaFilmeValido()

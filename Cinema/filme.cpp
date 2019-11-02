@@ -7,6 +7,16 @@
 #include "filme.h"
 
 
+Filme::Filme()
+{
+
+}
+
+Filme::Filme(std::string nome) : _nome(nome)
+{
+
+}
+
 float Filme::calculaRendimento()
 {
 	return 0;
@@ -20,3 +30,9 @@ int Filme::calculaPublico()
 void Filme::mostraExibicoes()
 {
 }
+
+std::string Filme::getNome()
+{
+    return _nome;
+}
+

@@ -15,4 +15,6 @@ private:
 
 	Horas Fim;
 
+    std::string getHorarioInicio();
+
 };

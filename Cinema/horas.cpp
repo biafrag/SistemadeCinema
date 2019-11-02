@@ -26,3 +26,8 @@
 //{
 //	return 0;
 //}
+
+std::string Horas::getHorarioPadrao()
+{
+    std::string string = std::to_string(horas) + "h";
+}

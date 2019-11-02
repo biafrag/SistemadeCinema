@@ -48,7 +48,7 @@ HEADERS += \
     horario.h \
     exibicao.h \
     cinema.h \
-    filme.h
+    filme.h \
 
 
 FORMS += \

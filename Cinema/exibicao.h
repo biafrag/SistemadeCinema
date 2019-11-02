@@ -10,6 +10,7 @@
 #include "data.h"
 #include "ingresso.h"
 #include "sala.h"
+#include "filme.h"
 
 class Exibicao
 {
@@ -21,10 +22,11 @@ private:
     Data _dia;
 
     Sala sala;
+    Filme _filme;
 
 
 public:
-    Exibicao(Horario horario, std::string audio, Data dia);
+    Exibicao(Horario horario, std::string audio, Data dia, Filme filme);
 
 	/**
      * @brief Importante para caso de uso Rendimento/Publico : Calcula Rendimento da exibição
@@ -51,6 +53,11 @@ public:
 	 */
 	void exibeAssentosDisponiveis();
 
+    Filme getFilme();
+
+    Horario getHorario();
+
+    Data getData();
 	/**
      * @brief Importante para caso de uso Alocacao de assentos
 	 */

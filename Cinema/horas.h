@@ -17,13 +17,6 @@ private:
 
 
 public:
-//	Horas operator+=();
-
-//	Horas operator=();
-
-//	Horas operator-();
-
-//	Horas operator+();
-
+    std::string getHorarioPadrao();
 };
 

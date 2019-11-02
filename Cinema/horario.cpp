@@ -7,3 +7,8 @@
 #include "horario.h"
 
 
+
+std::string Horario::getHorarioInicio()
+{
+    return Inicio.getHorarioPadrao();
+}
