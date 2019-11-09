@@ -59,6 +59,7 @@ public:
     std::string getAudio();
 
     int getPublico();
+    float getRendimento();
 
 	/**
      * @brief Importante para caso de uso Alocacao de assentos

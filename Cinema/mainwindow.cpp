@@ -122,27 +122,36 @@ void MainWindow::on_listWidget_clicked(const QModelIndex &index)
 
 void MainWindow::on_cadastroSalaButton_clicked()
 {
-    std::string id = ui->IDSala->text().toStdString();
     std::string nome = ui->nomeSala->text().toStdString();
     int nAssentos = ui->nAssentosSala->text().toInt();
 
-    if(!cinema->verificaSeSalaExiste(id))
-    {
-        Sala* sala = new Sala(nome,id,nAssentos);
-        cinema->addSala(sala);
-        ui->stackedWidget->setCurrentIndex(0);
-        ui->nomeSala->setText("");
-        ui->nAssentosSala->setText("");
-    }
-    else
+    if(nome == "" || ui->nAssentosSala->text() == "")
     {
         QMessageBox::information(
             this,
             tr("Cadastro de Sala"),
-            tr("Uma sala com esse ID ja existe.") );
+            tr("Informação faltando. Complete tudo.") );
+    }
+    else
+    {
+        if(!cinema->verificaSeSalaExiste(nome))
+        {
+            Sala* sala = new Sala(nome,nAssentos);
+            cinema->addSala(sala);
+            ui->stackedWidget->setCurrentIndex(0);
+            ui->nomeSala->setText("");
+            ui->nAssentosSala->setText("");
+        }
+        else
+        {
+            QMessageBox::information(
+                this,
+                tr("Cadastro de Sala"),
+                tr("Uma sala com esse ID ja existe.") );
+        }
     }
 
-    ui->IDSala->setText("");
+
 
 
 
@@ -256,7 +265,9 @@ void MainWindow::on_listWidget_5_clicked(const QModelIndex &index)
 {
     std::string s = ui->listWidget_5->currentItem()->text().toStdString();
     int publico = cinema->calculaPublicoFilme(s);
-    ui->publicoLabel->setText(QString::number(publico));
+    float rendimento = cinema->calculaRendimentoFilme(s);
+    ui->publicoLabel->setText(QString("R$") +QString::number(publico));
+    ui->rendimentoLabel->setText(QString::number(rendimento)+ QString(" pessoas"));
 }
 
 void MainWindow::on_voltarMenuButton_4_clicked()

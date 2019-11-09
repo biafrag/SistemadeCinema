@@ -14,10 +14,9 @@ Sala::Sala()
 
 
 
-Sala::Sala(std::string nome, std::string id, int num)
+Sala::Sala(std::string nome, int num)
 {
     _nome = nome;
-    _id = id;
     _numAssentos = num;
     inicializaAssentos(num);
 }
@@ -62,10 +61,6 @@ bool Sala::checaDataHora(QDate data, QTime hora)
     }
 }
 
-std::string Sala::getID()
-{
-    return _id;
-}
 
 std::string Sala::getName()
 {

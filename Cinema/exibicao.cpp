@@ -86,6 +86,12 @@ int Exibicao::getPublico()
     return cont;
 }
 
+float Exibicao::getRendimento()
+{
+    int p = getPublico();
+    return _preco*p;
+}
+
 void Exibicao::marcaAssento(int indice, bool status)
 {
     for(unsigned int i = 0; i < situacao.size(); i++)

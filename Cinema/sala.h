@@ -16,8 +16,6 @@ class Sala
 private:
     std::string _nome;
 
-    std::string _id;
-
     int _numAssentos;
 
     std::vector<Assento> _assentos;
@@ -28,7 +26,7 @@ private:
 
 public:
     Sala();
-    Sala(std::string nome, std::string id, int num);
+    Sala(std::string nome, int num);
 
     void marcaAssento(int id, bool status);
 
@@ -40,8 +38,6 @@ public:
 
     void addExibicao(Exibicao exibicao);
 
-
-    std::string getID();
     std::string getName();
     int getNumAssentos();
 

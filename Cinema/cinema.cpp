@@ -6,15 +6,6 @@
 
 #include "cinema.h"
 
-
-void Cinema::compraIngresso(Filme filme)
-{
-}
-
-void Cinema::exibeFilmesEmExibicao()
-{
-}
-
 void Cinema::registraFilme(std::string nome, int ano, int classificacao, std::string nacionalidade)
 {
     Filme novoFilme(nome);
@@ -78,10 +69,6 @@ void Cinema::addExibicao(QDate data, QTime horario, std::string audio, Sala* sal
     sala->addExibicao(e);
 }
 
-void Cinema::ExibeFilmesRegistrados()
-{
-}
-
 std::vector<Sala*> Cinema::verificaSalasDisponiveis(QDate data, QTime horario)
 {
     std::vector<Sala*> salasLivres;
@@ -106,11 +93,11 @@ void Cinema::addSala(Sala* sala)
     salas.push_back(sala);
 }
 
-bool Cinema::verificaSeSalaExiste(std::string id)
+bool Cinema::verificaSeSalaExiste(std::string nome)
 {
     for(unsigned int i = 0; i < salas.size(); i++)
     {
-        if(id == salas[i]->getID())
+        if(nome == salas[i]->getName())
         {
             return true;
         }
@@ -181,5 +168,16 @@ int Cinema::calculaPublicoFilme(std::string nomeFilme)
 
 float Cinema::calculaRendimentoFilme(std::string nomeFilme)
 {
+    Filme filme = findFilme(nomeFilme);
+    std::vector<Exibicao> exs = getExibicoes(nomeFilme);
 
+    float soma = 0;
+    for(unsigned int i = 0; i < exs.size(); i++)
+    {
+        Exibicao ex = exs[i];
+        float r = ex.getRendimento();
+        soma += r;
+    }
+
+    return soma;
 }
