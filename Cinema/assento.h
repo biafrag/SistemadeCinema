@@ -6,6 +6,7 @@
 #include <iostream>
 #include <assert.h>
 
+class SituacaoAssento;
 class Assento
 {
 private:
@@ -20,6 +21,8 @@ private:
     std::string _tipo;
 
     bool _status;
+
+    std::vector<SituacaoAssento*> situacao;
 
 public:
 
@@ -39,9 +42,6 @@ public:
      * @brief Seta o status do assento
      */
     void setStatus(bool status);
-
-
-
 
 };
 

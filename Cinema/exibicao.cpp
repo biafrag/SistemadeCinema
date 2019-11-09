@@ -5,15 +5,29 @@
 #include <assert.h>
 
 #include "exibicao.h"
+#include "filme.h"
+#include "assento.h"
+#include "sala.h"
+#include "situacaoassento.h"
 
+Exibicao::Exibicao()
+{
 
-Exibicao::Exibicao(Horario horario, std::string audio, Data dia, Filme filme):
+}
+
+Exibicao::Exibicao(QTime horario, std::string audio, QDate dia, Sala* sala, Filme filme, float preco):
     _horario(horario),
     _audio(audio),
     _dia(dia),
-    _filme(filme)
+    _filme(filme),
+    _sala(sala),
+    _preco(preco)
 {
-
+    for(unsigned int i = 0; i < sala->getNumAssentos(); i++)
+    {
+        SituacaoAssento* s = new SituacaoAssento(i,this);
+        situacao.push_back(s);
+    }
 }
 
 float Exibicao::calculaRendimento()
@@ -26,33 +40,78 @@ int Exibicao::calculaPublico()
 	return 0;
 }
 
-void Exibicao::exibeHorario()
-{
-}
-
-void Exibicao::exibeData()
-{
-}
-
-void Exibicao::exibeAssentosDisponiveis()
-{
-}
-
 Filme Exibicao::getFilme()
 {
     return _filme;
 }
 
-Horario Exibicao::getHorario()
+QTime Exibicao::getHorario()
 {
     return _horario;
 }
 
-Data Exibicao::getData()
+QDate Exibicao::getData()
 {
     return _dia;
 }
 
-void Exibicao::marcaAssento(Assento assento, bool status)
+std::string Exibicao::getSalaNome()
 {
+    return _sala->getName();
+}
+
+float Exibicao::getPreco()
+{
+    return _preco;
+}
+
+std::string Exibicao::getAudio()
+{
+    return _audio;
+}
+
+int Exibicao::getPublico()
+{
+    int cont = 0;
+    for(unsigned int i = 0; i < situacao.size(); i++)
+    {
+        SituacaoAssento* s = situacao[i];
+        Assento* assento = s->getAssento();
+        //Se for true quer dizer que esta livre
+        if(!assento->getStatus())
+        {
+            cont++;
+        }
+    }
+    return cont;
+}
+
+void Exibicao::marcaAssento(int indice, bool status)
+{
+    for(unsigned int i = 0; i < situacao.size(); i++)
+    {
+        SituacaoAssento* s = situacao[i];
+        Assento* assento = s->getAssento();
+        //Se for true quer dizer que esta livre
+        if(assento->getNumero() == indice)
+        {
+            assento->setStatus(status);
+        }
+    }
+}
+
+std::vector<Assento*> Exibicao::getAssentosLivres()
+{
+    std::vector<Assento*> assentos;
+    for(unsigned int i = 0; i < situacao.size(); i++)
+    {
+        SituacaoAssento* s = situacao[i];
+        Assento* assento = s->getAssento();
+        //Se for true quer dizer que esta livre
+        if(assento->getStatus())
+        {
+            assentos.push_back(assento);
+        }
+    }
+    return assentos;
 }

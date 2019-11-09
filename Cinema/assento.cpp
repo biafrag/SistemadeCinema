@@ -8,9 +8,11 @@
 
 
 
-Assento::Assento(int numero, std::string tipo, bool status)
+Assento::Assento(int numero, std::string tipo, bool status):
+    _numero(numero),
+    _tipo(tipo),
+    _status(status)
 {
-    _numero = numero;
 }
 
 

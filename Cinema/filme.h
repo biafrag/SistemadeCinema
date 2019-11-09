@@ -10,13 +10,17 @@ class Filme
 {
 private:
     std::string _nome;
-
+    int _ano;
+    int _classificacao;
+    std::string _nacionalidade;
 
 public:
 
     Filme();
 
     Filme(std::string nome);
+
+    Filme(std::string nome, int ano, int classificacao, std::string nacionalidade);
 
 	/**
      * @brief Importante para caso de uso Rendimento/P?blico

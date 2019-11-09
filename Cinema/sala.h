@@ -7,6 +7,10 @@
 #include <assert.h>
 
 #include "assento.h"
+#include "exibicao.h"
+#include <QDate>
+#include<QTime>
+
 class Sala
 {
 private:
@@ -18,6 +22,9 @@ private:
 
     std::vector<Assento> _assentos;
 
+    std::vector<Exibicao> _exibicoes;
+
+
 
 public:
     Sala();
@@ -28,5 +35,14 @@ public:
     void marcaTodoOsAssentos(bool status);
 
     void inicializaAssentos(int num);
+
+    bool checaDataHora(QDate data, QTime hora);
+
+    void addExibicao(Exibicao exibicao);
+
+
+    std::string getID();
+    std::string getName();
+    int getNumAssentos();
 
 };

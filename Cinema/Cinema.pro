@@ -27,28 +27,20 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     sala.cpp \
-    horas.cpp \
-    ingresso.cpp \
     assento.cpp \
-    data.cpp \
-    ator.cpp \
-    horario.cpp \
     exibicao.cpp \
     cinema.cpp \
-    filme.cpp
+    filme.cpp \
+    situacaoassento.cpp
 
 HEADERS += \
         mainwindow.h \
     sala.h \
-    horas.h \
-    ingresso.h \
     assento.h \
-    data.h \
-    ator.h \
-    horario.h \
     exibicao.h \
     cinema.h \
     filme.h \
+    situacaoassento.h
 
 
 FORMS += \

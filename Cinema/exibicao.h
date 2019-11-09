@@ -6,27 +6,35 @@
 #include <iostream>
 #include <assert.h>
 
-#include "horario.h"
-#include "data.h"
-#include "ingresso.h"
-#include "sala.h"
 #include "filme.h"
+#include "assento.h"
 
+#include <QDate>
+#include <QTime>
+class Sala;
+class SituacaoAssento;
 class Exibicao
 {
 private:
-    Horario _horario;
+    QTime _horario;
 
     std::string _audio;
 
-    Data _dia;
+    QDate _dia;
 
-    Sala sala;
+    Sala* _sala;
+
     Filme _filme;
 
+    float _preco;
+
+    std::vector<SituacaoAssento*> situacao;
 
 public:
-    Exibicao(Horario horario, std::string audio, Data dia, Filme filme);
+
+    Exibicao();
+
+    Exibicao(QTime horario, std::string audio, QDate dia, Sala *sala, Filme filme, float preco);
 
 	/**
      * @brief Importante para caso de uso Rendimento/Publico : Calcula Rendimento da exibição
@@ -38,29 +46,25 @@ public:
 	 */
 	int calculaPublico();
 
-	/**
-     * @brief Importante para caso de uso Alocacao de assentos
-	 */
-	void exibeHorario();
-
-	/**
-     * @brief Importante para caso de uso Alocacao de assentos
-	 */
-	void exibeData();
-
-	/**
-     * @brief Importante para caso de uso Alocacao de assentos
-	 */
-	void exibeAssentosDisponiveis();
-
     Filme getFilme();
 
-    Horario getHorario();
+    QTime getHorario();
 
-    Data getData();
+    QDate getData();
+
+    std::string getSalaNome();
+
+    float getPreco();
+
+    std::string getAudio();
+
+    int getPublico();
+
 	/**
      * @brief Importante para caso de uso Alocacao de assentos
 	 */
-    void marcaAssento(Assento assento, bool status);
+    void marcaAssento(int indice, bool status);
+
+    std::vector<Assento *> getAssentosLivres();
 
 };
