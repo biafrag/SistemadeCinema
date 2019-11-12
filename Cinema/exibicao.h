@@ -61,6 +61,8 @@ public:
     int getPublico();
     float getRendimento();
 
+    std::vector<SituacaoAssento*> getSituacaoAssentos();
+
 	/**
      * @brief Importante para caso de uso Alocacao de assentos
 	 */

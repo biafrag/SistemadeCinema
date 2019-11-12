@@ -38,5 +38,8 @@ public:
 	void mostraExibicoes();
 
     std::string getNome();
+    int getAno();
+    int getClassificacao();
+    std::string getNacionalidade();
 
 };

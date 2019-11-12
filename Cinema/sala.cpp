@@ -72,6 +72,16 @@ int Sala::getNumAssentos()
     return _numAssentos;
 }
 
+std::vector<Assento> Sala::getAssentos()
+{
+    return _assentos;
+}
+
+std::vector<Exibicao> Sala::getExibicoes()
+{
+    return _exibicoes;
+}
+
 void Sala::addExibicao(Exibicao exibicao)
 {
     _exibicoes.push_back(exibicao);

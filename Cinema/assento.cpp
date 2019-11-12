@@ -10,7 +10,6 @@
 
 Assento::Assento(int numero, std::string tipo, bool status):
     _numero(numero),
-    _tipo(tipo),
     _status(status)
 {
 }

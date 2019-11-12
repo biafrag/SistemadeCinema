@@ -40,5 +40,7 @@ public:
 
     std::string getName();
     int getNumAssentos();
+    std::vector<Assento> getAssentos();
+    std::vector<Exibicao> getExibicoes();
 
 };

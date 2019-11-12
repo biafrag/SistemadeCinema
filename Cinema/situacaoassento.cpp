@@ -21,10 +21,6 @@ Assento *SituacaoAssento::getAssento()
     return _assento;
 }
 
-float SituacaoAssento::getPrecoAssentoExibicao()
-{
-    return _preco;
-}
 
 bool SituacaoAssento::getStatusAssentoEmExibicao()
 {

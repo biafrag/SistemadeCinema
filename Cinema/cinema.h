@@ -33,6 +33,16 @@ public:
     QStringList getnomesFilmesEmExibicao();
 
     /**
+     * @brief Retorna todos os filmes em exibição
+     */
+    std::vector<Filme> getFilmesEmExibicao();
+
+    /**
+     * @brief Retorna todas as salas do cinema
+     */
+    std::vector<Sala*> getSalas();
+
+    /**
      * @brief Retorna todas as exibicoes de um determinado filme
      */
     std::vector<Exibicao> getExibicoes(std::string nomeFilme);

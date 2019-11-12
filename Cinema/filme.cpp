@@ -45,3 +45,18 @@ std::string Filme::getNome()
     return _nome;
 }
 
+int Filme::getAno()
+{
+    return _ano;
+}
+
+int Filme::getClassificacao()
+{
+    return _classificacao;
+}
+
+std::string Filme::getNacionalidade()
+{
+    return _nacionalidade;
+}
+

@@ -8,7 +8,7 @@
 
 void Cinema::registraFilme(std::string nome, int ano, int classificacao, std::string nacionalidade)
 {
-    Filme novoFilme(nome);
+    Filme novoFilme(nome,ano,classificacao,nacionalidade);
     filmesExibicao.push_back(novoFilme);
 }
 
@@ -22,6 +22,16 @@ QStringList Cinema::getnomesFilmesEmExibicao()
         lista.append(s);
     }
     return lista;
+}
+
+std::vector<Filme> Cinema::getFilmesEmExibicao()
+{
+    return filmesExibicao;
+}
+
+std::vector<Sala *> Cinema::getSalas()
+{
+    return salas;
 }
 
 std::vector<Exibicao> Cinema::getExibicoes(std::string nomeFilme)

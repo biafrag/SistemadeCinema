@@ -5,6 +5,45 @@
 #include "filme.h"
 #include "sala.h"
 #include "exibicao.h"
+#include "situacaoassento.h"
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include<QFile>
+
+void MainWindow::loadJson()
+{
+
+  QFile file("../Example.json");
+  file.open(QIODevice::ReadOnly | QIODevice::Text);
+  QByteArray jsonData = file.readAll();
+  file.close();
+
+  QJsonDocument document = QJsonDocument::fromJson(jsonData);
+  QJsonObject object = document.object();
+
+  QJsonValue valueFilme = object.value("Filmes");
+  QJsonArray arrayFilmes = valueFilme.toArray();
+  foreach (const QJsonValue & v, arrayFilmes)
+  {
+          std::string nome = v.toObject().value("Nome").toString().toStdString();
+          int ano =  v.toObject().value("Ano").toInt();
+          int classificacao = v.toObject().value("Classificacao").toInt();
+          std::string nacionalidade = v.toObject().value("Nacionalidade").toString().toStdString();
+          cinema->registraFilme(nome,ano,classificacao,nacionalidade);
+  }
+
+  QJsonValue valueSala = object.value("Salas");
+  QJsonArray arraySalas = valueSala.toArray();
+  foreach (const QJsonValue & v, arraySalas)
+  {
+          std::string nome = v.toObject().value("Nome").toString().toStdString();
+          int nAss = v.toObject().value("NAssentos").toInt();
+          Sala* sala = new Sala(nome,nAss);
+          cinema->addSala(sala);
+  }
+
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,6 +51,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     cinema = new Cinema();
+
+    loadJson();
 }
 
 MainWindow::~MainWindow()
@@ -74,7 +115,6 @@ void MainWindow::on_cadastroExibicoesButton_clicked()
     ui->listWidget_4->clear();
     QDate date = ui->dateTimeEdit->date();
     QTime time = ui->dateTimeEdit->time();
-    std::cout<<"Dia: "<< date.day()<< " mes: "<<date.month()<<" ano "<<date.year()<<std::endl;
 
     std::vector<Sala*> salas = cinema->verificaSalasDisponiveis(date,time);
     for(unsigned int i = 0; i < salas.size(); i++)
@@ -151,16 +191,11 @@ void MainWindow::on_cadastroSalaButton_clicked()
         }
     }
 
-
-
-
-
 }
 void MainWindow::on_dateTimeEdit_dateTimeChanged(const QDateTime &dateTime)
 {
     QDate date = dateTime.date();
     QTime time = dateTime.time();
-    std::cout<<"Dia: "<< date.day()<< " mes: "<<date.month()<<" ano "<<date.year()<<std::endl;
 
     ui->listWidget_4->clear();
     std::vector<Sala*> salas = cinema->verificaSalasDisponiveis(date,time);
@@ -273,5 +308,148 @@ void MainWindow::on_listWidget_5_clicked(const QModelIndex &index)
 void MainWindow::on_voltarMenuButton_4_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+
+}
+QJsonObject MainWindow::salvaFilme(Filme filme)
+{
+    QJsonObject filmeObject;
+    std::string nome = filme.getNome();
+    int ano = filme.getAno();
+    int classi = filme.getClassificacao();
+    std::string nacionalidade = filme.getNacionalidade();
+    filmeObject.insert("Nome", QJsonValue::fromVariant(nome.c_str()));
+    filmeObject.insert("Ano", QJsonValue::fromVariant(QString::number(ano).toStdString().c_str()));
+    filmeObject.insert("Nacionalidade", QJsonValue::fromVariant(nacionalidade.c_str()));
+    filmeObject.insert("Classificacao", QJsonValue::fromVariant(classi));
+
+    return filmeObject;
+}
+
+QJsonObject MainWindow::salvaAssento(Assento* assento)
+{
+    QJsonObject assentoObj;
+    bool status = assento->getStatus();
+    int numero = assento->getNumero();
+    assentoObj.insert("Status",QJsonValue::fromVariant(status));
+    assentoObj.insert("Numero",QJsonValue::fromVariant(numero));
+
+    return assentoObj;
+}
+
+QJsonObject MainWindow::salvaSituacaoAssento(SituacaoAssento* situ)
+{
+    QJsonObject situAssento;
+    bool status = situ->getStatusAssentoEmExibicao();
+    situAssento.insert("Status",QJsonValue::fromVariant(status));
+    //Não precisa de exibicao pq infos ja estão guardadas
+    Assento* assento = situ->getAssento();
+    QJsonObject assentoObj = salvaAssento(assento);
+    situAssento.insert("Assento",assentoObj);
+
+    return situAssento;
+}
+
+QJsonObject MainWindow::salvaExibicao(Exibicao exibicao)
+{
+    QJsonObject salaExibicao;
+
+    QTime horario = exibicao.getHorario();
+
+    std::string audio = exibicao.getAudio();
+
+    QDate dia = exibicao.getData();
+
+    Filme filme = exibicao.getFilme();
+
+    float preco = exibicao.getPreco();
+
+    salaExibicao.insert("Data",QJsonValue::fromVariant(dia.toString("dd.MM.yyyy")));
+    salaExibicao.insert("Audio",QJsonValue::fromVariant(audio.c_str()));
+    salaExibicao.insert("Horario",QJsonValue::fromVariant(horario.toString().toStdString().c_str()));
+    salaExibicao.insert("Preco",QJsonValue::fromVariant(preco));
+    QJsonObject objectFilme = salvaFilme(filme);
+    salaExibicao.insert("Filme",objectFilme);
+
+    std::vector<SituacaoAssento*> situs = exibicao.getSituacaoAssentos();
+    QJsonArray situArray;
+    //Salva sala
+    for(unsigned int i = 0; i < situs.size(); i++)
+    {
+        SituacaoAssento* s = situs[i];
+        QJsonObject situAssento = salvaSituacaoAssento(s);
+        situArray.push_back(situAssento);
+    }
+    salaExibicao.insert("Situacao Assento",situArray);
+    return salaExibicao;
+}
+
+
+
+void MainWindow::on_salvarButton_clicked()
+{
+
+    std::vector<Filme> filmes = cinema->getFilmesEmExibicao();
+    QJsonObject recordObject;
+    QJsonArray filmeObjectArray;
+    QJsonObject filmeObject;
+    QJsonArray salaObjectArray;
+    QJsonObject salaObject;
+
+    //Salva Filmes
+    for(unsigned int i = 0; i < filmes.size(); i ++)
+    {
+        Filme filme = filmes[i];
+        filmeObject = salvaFilme(filme);
+        filmeObjectArray.push_back(filmeObject);
+
+
+    }
+    recordObject.insert("Filmes",filmeObjectArray);
+
+    std::vector<Sala*> salas = cinema->getSalas();
+    //Salva sala
+    for(unsigned int i = 0; i < salas.size(); i++)
+    {
+        Sala* sala = salas[i];
+        std::string nome = sala->getName();
+        int nAss = sala->getNumAssentos();
+
+        salaObject.insert("Nome", QJsonValue::fromVariant(nome.c_str()));
+        salaObject.insert("NAssentos", QJsonValue::fromVariant(QString::number(nAss).toStdString().c_str()));
+
+        QJsonArray ExibicoesSalaArray;
+        QJsonObject salaExibicao;
+        std::vector<Exibicao> ex = sala->getExibicoes();
+        for(unsigned int i = 0; i < ex.size(); i ++)
+        {
+            Exibicao exibicao = ex[i];
+            salaExibicao = salvaExibicao(exibicao);
+            ExibicoesSalaArray.push_back(salaExibicao);
+        }
+        QJsonValue q(ExibicoesSalaArray);
+        salaObject.insert("Exibicoes",q);
+        salaObjectArray.push_back(salaObject);
+
+
+    }
+    recordObject.insert("Salas",salaObjectArray);
+
+
+//    QJsonObject addressObject;
+//    addressObject.insert("Street", "Downing Street 10");
+//    addressObject.insert("City", "London");
+//    addressObject.insert("Country", "Great Britain");
+//    recordObject.insert("Address", addressObject);
+
+//    QJsonArray phoneNumbersArray;
+//    phoneNumbersArray.push_back("+44 1234567");
+//    phoneNumbersArray.push_back("+44 2345678");
+//    recordObject.insert("Phone Numbers", phoneNumbersArray);
+
+    QJsonDocument doc(recordObject);
+
+    QFile jsonFile("../Example.json");
+    jsonFile.open(QFile::WriteOnly);
+    jsonFile.write(doc.toJson());
 
 }

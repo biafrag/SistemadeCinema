@@ -92,6 +92,11 @@ float Exibicao::getRendimento()
     return _preco*p;
 }
 
+std::vector<SituacaoAssento *> Exibicao::getSituacaoAssentos()
+{
+    return situacao;
+}
+
 void Exibicao::marcaAssento(int indice, bool status)
 {
     for(unsigned int i = 0; i < situacao.size(); i++)

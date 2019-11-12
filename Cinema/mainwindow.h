@@ -15,6 +15,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private:
+void loadJson();
+QJsonObject salvaFilme(Filme filme);
+QJsonObject salvaExibicao(Exibicao exibicao);
+QJsonObject salvaSituacaoAssento(SituacaoAssento* situ);
+QJsonObject salvaAssento(Assento* assento);
 
 private slots:
     void on_CompraIngressosButton_clicked();
@@ -56,6 +62,8 @@ private slots:
     void on_listWidget_5_clicked(const QModelIndex &index);
 
     void on_voltarMenuButton_4_clicked();
+
+    void on_salvarButton_clicked();
 
 private:
     Ui::MainWindow *ui;

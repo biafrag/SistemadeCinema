@@ -15,14 +15,8 @@ private:
      */
     int _numero;
 
-    /**
-     * @brief Precisa mesmo?
-     */
-    std::string _tipo;
-
     bool _status;
 
-    std::vector<SituacaoAssento*> situacao;
 
 public:
 
