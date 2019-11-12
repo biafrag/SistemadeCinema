@@ -51,8 +51,6 @@ private slots:
 
     void on_CadastrarExibicaoButton_clicked();
 
-    void on_listWidget_activated(const QModelIndex &index);
-
     void on_listWidget_2_clicked(const QModelIndex &index);
 
     void on_CompraIngressoButton_clicked();

@@ -78,7 +78,7 @@ int Exibicao::getPublico()
         SituacaoAssento* s = situacao[i];
         Assento* assento = s->getAssento();
         //Se for true quer dizer que esta livre
-        if(!assento->getStatus())
+        if(!s->getStatusAssentoEmExibicao())
         {
             cont++;
         }
@@ -88,8 +88,28 @@ int Exibicao::getPublico()
 
 float Exibicao::getRendimento()
 {
-    int p = getPublico();
-    return _preco*p;
+    float soma = 0;
+
+    for(unsigned int i = 0; i < situacao.size(); i++)
+    {
+        SituacaoAssento* s = situacao[i];
+        Assento* assento = s->getAssento();
+        //Se for true quer dizer que esta livre
+        if(s->getStatusAssentoEmExibicao() == false)
+        {
+            bool tipo = s->getTipoAssento();
+            //inteira
+            if(tipo)
+            {
+                soma += _preco;
+            }
+            else
+            {
+                soma += _preco/2.0;
+            }
+        }
+    }
+    return soma;
 }
 
 std::vector<SituacaoAssento *> Exibicao::getSituacaoAssentos()
@@ -97,7 +117,7 @@ std::vector<SituacaoAssento *> Exibicao::getSituacaoAssentos()
     return situacao;
 }
 
-void Exibicao::marcaAssento(int indice, bool status)
+void Exibicao::marcaAssento(int indice, bool status, bool tipoAssento)
 {
     for(unsigned int i = 0; i < situacao.size(); i++)
     {
@@ -106,7 +126,9 @@ void Exibicao::marcaAssento(int indice, bool status)
         //Se for true quer dizer que esta livre
         if(assento->getNumero() == indice)
         {
-            assento->setStatus(status);
+            //assento->setStatus(status);
+            s->setStatusAssento(status);
+            s->setTipoAssento(tipoAssento);
         }
     }
 }
@@ -119,7 +141,7 @@ std::vector<Assento*> Exibicao::getAssentosLivres()
         SituacaoAssento* s = situacao[i];
         Assento* assento = s->getAssento();
         //Se for true quer dizer que esta livre
-        if(assento->getStatus())
+        if(s->getStatusAssentoEmExibicao())
         {
             assentos.push_back(assento);
         }

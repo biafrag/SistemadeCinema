@@ -15,8 +15,14 @@ private:
      */
     int _numero;
 
+    /**
+     * @brief Precisa mesmo?
+     */
+    std::string _tipo;
+
     bool _status;
 
+    std::vector<SituacaoAssento*> situacao;
 
 public:
 
@@ -26,16 +32,6 @@ public:
      * @brief Retorna o numero do assento
      */
     int getNumero();
-
-    /**
-     * @brief Retorna o status do assento
-     */
-    bool getStatus();
-
-    /**
-     * @brief Seta o status do assento
-     */
-    void setStatus(bool status);
 
 };
 

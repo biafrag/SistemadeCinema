@@ -18,8 +18,6 @@ private:
 
     int _numAssentos;
 
-    std::vector<Assento> _assentos;
-
     std::vector<Exibicao> _exibicoes;
 
 

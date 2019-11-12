@@ -18,35 +18,35 @@ Sala::Sala(std::string nome, int num)
 {
     _nome = nome;
     _numAssentos = num;
-    inicializaAssentos(num);
+    //inicializaAssentos(num);
 }
 
 
 
-void Sala::marcaAssento(int id, bool status)
-{
-    _assentos[id].setStatus(status);
-}
+//void Sala::marcaAssento(int id, bool status)
+//{
+//    _assentos[id].setStatus(status);
+//}
 
 
 
-void Sala::marcaTodoOsAssentos(bool status)
-{
-    for(unsigned int i = 0; i < _numAssentos; i++)
-    {
-        _assentos[i].setStatus(status);
-    }
-}
+//void Sala::marcaTodoOsAssentos(bool status)
+//{
+//    for(unsigned int i = 0; i < _numAssentos; i++)
+//    {
+//        _assentos[i].setStatus(status);
+//    }
+//}
 
 
 
-void Sala::inicializaAssentos(int num)
-{
-    for(unsigned int i = 0; i < num; i++)
-    {
-        _assentos.push_back(Assento(i + 1));
-    }
-}
+//void Sala::inicializaAssentos(int num)
+//{
+//    for(unsigned int i = 0; i < num; i++)
+//    {
+//        _assentos.push_back(Assento(i + 1));
+//    }
+//}
 
 bool Sala::checaDataHora(QDate data, QTime hora)
 {
@@ -72,10 +72,10 @@ int Sala::getNumAssentos()
     return _numAssentos;
 }
 
-std::vector<Assento> Sala::getAssentos()
-{
-    return _assentos;
-}
+//std::vector<Assento> Sala::getAssentos()
+//{
+//    return _assentos;
+//}
 
 std::vector<Exibicao> Sala::getExibicoes()
 {

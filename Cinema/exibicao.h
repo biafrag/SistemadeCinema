@@ -66,7 +66,7 @@ public:
 	/**
      * @brief Importante para caso de uso Alocacao de assentos
 	 */
-    void marcaAssento(int indice, bool status);
+    void marcaAssento(int indice, bool status, bool tipoAssento);
 
     std::vector<Assento *> getAssentosLivres();
 
